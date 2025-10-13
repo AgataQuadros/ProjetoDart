@@ -10,9 +10,6 @@ int lerNota(String mensagem) {
     String entrada = stdin.readLineSync()!;
     // entrada onde o usuario vai digitar o numero
 
-    entrada = entrada.replaceAll(',', '.');
-    // aceita tanto ponto quanto virgula para separar os numeros
-    // iso torna mais facil de guiar o usuario
     numero = int.tryParse(entrada);
     // tenta converter a entrada para numero
 
