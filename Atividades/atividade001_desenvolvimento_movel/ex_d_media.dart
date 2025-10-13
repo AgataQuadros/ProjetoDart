@@ -20,9 +20,10 @@ void main() {
 
   String status = ""; // define a variavel status
 
+  // validação que define o status do aluno
   if (soma < 40) {
     status = "Reprovou";
-  } else if (soma < 60) {
+  } else if (soma < 50) {
     status = "esta de Recuperação";
   } else {
     status = "Passou";
