@@ -22,6 +22,17 @@ void main() {
 
   int restoDivisao = numero1 % numero2; // Calculo do resto da divisão
 
+  if (numero2 == 0) {
+    print("~°" * 20);
+    print("A divisão por 0 não é possivel");
+    print("Não se surpreenda caso o programa quebrar");
+    print("Reinicie-o e tente novamente com valores diferentes");
+    print("~°" * 20);
+  }
+  // a "!" mas linahs de leitura não deixa
+  //fazer uma validação externa de null
+  // por isso eu não fiz uma
+
   print("~" * 20);
   print("A soma de $numero1 + $numero2 = $soma");
   print(" ");
