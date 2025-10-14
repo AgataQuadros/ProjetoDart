@@ -48,8 +48,8 @@ void main() {
   }
 
   double divisao = dividendo! / divisor!; // divide os numeros
-  
+
   print(" ");
-  print("A divisão de $dividendo por $divisor = ${divisao.toStringAsFixed(4)}");
+  print("A divisão de $dividendo % $divisor = ${divisao.toStringAsFixed(4)}"); // força a saida a ter 4 casas decimais
   print("~" * 20);
 }
