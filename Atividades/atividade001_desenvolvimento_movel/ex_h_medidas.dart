@@ -1,117 +1,108 @@
 import "dart:io";
 
-int? medidaValor;
-String? saidaMedidaValor;
-int? medidaPretendida;
-String? saidaMedidaPretendida;
-double? valorConvertido;
-double? valor;
+// função para ler e validar um número decimal
+int lerNumero(String mensagem) {
+  int? numero; // define a variavel "numero"
 
-void main () {
-  print("~"*30);
-  print("Conversor de Medidas");
-  print("~"*30);
+  while (numero == null) {
+    // verifica se a variavel é null dentro de um loop
+    stdout.write(mensagem);
+    String entrada = stdin.readLineSync()!;
+    // entrada onde o usuario vai digitar o numero
 
-  while (true) {
-    stdout.write("Digite o valor para conversão (sem unidade de medida): ");
-    valor = double.tryParse(stdin.readLineSync()!);
-    print("~"*30);
+    numero = int.tryParse(entrada);
+    // tenta converter a entrada para numero
 
-    if (valor != null) {
-      while (true) {
-        print("1 - Centímetros (cm)");
-        print("2 - Metros (m)");
-        print("3 - Quilômetros (km)");
-
-        stdout.write("Escolha a unidade de medida do valor: ");
-        medidaValor = int.tryParse(stdin.readLineSync()!);
-        print("~"*30);
-
-        if (medidaValor != null && medidaValor! > 0 && medidaValor! < 4) {
-          while (true) {
-            print("1 - Centímetros (cm)");
-            print("2 - Metros (m)");
-            print("3 - Quilômetros (km)");
-
-            stdout.write("Escolha a unidade de medida pretendida: ");
-            medidaPretendida = int.tryParse(stdin.readLineSync()!);
-            print("~"*30);
-
-            if (medidaPretendida != null && medidaPretendida! > 0 && medidaPretendida! < 4 && medidaPretendida != medidaValor) {
-              break;
-            } else {
-              print("Por favor digite o número de alguma opção, diferente da que o valor está!");
-              print("~"*30);
-              continue;
-            }
-          }
-          break;
-        } else {
-          print("Por favor digite o número de alguma opção!");
-          print("~"*30);
-          continue;
-        }
-      }
-    } else {
-      print("Por favor digite um número como valor, sem sua unidade de medida!");
-      print("~"*30);
-      continue;
+    if (numero == null) {
+      // se não conseguir retorna a seguinte mensagem
+      print("Valor inválido!! Digite um número\n");
+      print("~°" * 20);
     }
+  }
 
-    switch ([medidaValor!, medidaPretendida!]) {
-      case [1, 2]:
-        // Centímetro para metro
-        valorConvertido = valor!/100;
-        saidaMedidaValor = "centímetros";
-        saidaMedidaPretendida = "metros";
-        break;
-      case [1, 3]:
-        // Centímetro para quilômetro
-        valorConvertido = valor!/100000;
-        saidaMedidaValor = "centímetros";
-        saidaMedidaPretendida = "quilômetros";
-        break;
-      case [2, 1]:
-        // Metro para centímetro
-        valorConvertido = valor!*100;
-        saidaMedidaValor = "metros";
-        saidaMedidaPretendida = "centímetros";
-        break;
-      case [2, 3]:
-        // Metro para quilômetro
-        valorConvertido = valor!/1000;
-        saidaMedidaValor = "metros";
-        saidaMedidaPretendida = "quilômetros";
-        break;
-      case [3, 1]:
-        // Quilômetro para centímetro
-        valorConvertido = valor!*100000;
-        saidaMedidaValor = "quilômetros";
-        saidaMedidaPretendida = "centímetros";
-        break;
-      case [3, 2]:
-        // Quilômetro para metro
-        valorConvertido = valor!*1000;
-        saidaMedidaValor = "quilômetros";
-        saidaMedidaPretendida = "metros";
-        break;
-      default:
-        print("Erro fatal: Não era pra chegar aqui!");
-        print("~"*30);
-        break;
-    }
+  return numero;
+}
 
-    print("$valor $saidaMedidaValor equivalem a $valorConvertido $saidaMedidaPretendida");
-    print("~"*30);
+void main() {
+  print("~°" * 20);
+  var valor = lerNumero(
+    "Digite o valor para conversão (sem unidade de medida): ",
+  );
+  print("~°" * 20);
 
-    stdout.write("Pressione enter para converter outra medida ou 0 para sair: ");
-    String continuar = stdin.readLineSync()!;
-    print("~"*30);
+  print(" ");
+  print("~°" * 20);
+  print("1 - Centímetros (cm)");
+  print("2 - Metros (m)");
+  print("3 - Quilômetros (km)");
+  print("");
+  var medidaValor = lerNumero("Escolha a unidade de medida do valor: ");
+  print("~°" * 20);
 
-    if (continuar == "0") {
-      break;
+  if (medidaValor == 0 && medidaValor! < 4) {
+    print("Por favor digite o número de alguma opção");
+    print("~°" * 20);
+    return;
+  } else {
+    print(" ");
+    print("~°" * 20);
+    print("1 - Centímetros (cm)");
+    print("2 - Metros (m)");
+    print("3 - Quilômetros (km)");
+    print(" ");
+    var medidaPretendida = lerNumero(
+      "Escolha a unidade de medida pretendida: ",
+    );
+
+    print("~°" * 20);
+
+    double valorConvertido = 0;
+    if (medidaPretendida == 1 && medidaValor == 2) {
+      // Centímetro para metro
+      valorConvertido = valor / 100;
+
+      print(" ");
+      print("A medida ficam em $valorConvertido m");
+      print("~" * 20);
+    } else if (medidaPretendida == 1 && medidaValor == 3) {
+      // Centímetro para quilômetro
+      valorConvertido = valor / 100000;
+
+      print(" ");
+      print("A medida ficam em $valorConvertido km");
+      print("~" * 20);
+    } else if (medidaPretendida == 2 && medidaValor == 1) {
+      // Metro para centímetro
+      valorConvertido = valor * 100;
+
+      print(" ");
+      print("A medida ficam em $valorConvertido cm");
+      print("~" * 20);
+    } else if (medidaPretendida == 2 && medidaValor == 3) {
+      // Metro para quilômetro
+      valorConvertido = valor / 1000;
+
+      print(" ");
+      print("A medida ficam em $valorConvertido km");
+      print("~" * 20);
+    } else if (medidaPretendida == 3 && medidaValor == 1) {
+      // Quilômetro para centímetro
+      valorConvertido = valor * 100000;
+
+      print(" ");
+      print("A medida ficam em $valorConvertido cm");
+      print("~" * 20);
+    } else if (medidaPretendida == 3 && medidaValor == 2) {
+      // Quilômetro para metro
+      valorConvertido = valor * 1000;
+
+      print(" ");
+      print("A medida ficam em $valorConvertido m");
+      print("~" * 20);
     } else {
-      continue;
+      print(" ");
+      print("Não foi possivel fazer a conversão, tente novamente!");
+      print("~°" * 20);
     }
   }
 }
