@@ -39,7 +39,7 @@ void main() {
   var medidaValor = lerNumero("Escolha a unidade de medida do valor: ");
   print("~°" * 20);
 
-  if (medidaValor == 0 && medidaValor < 4) {
+  if (medidaValor < 1 || medidaValor > 3) {
     print("Por favor digite o número de alguma opção");
     print("~°" * 20);
     return;

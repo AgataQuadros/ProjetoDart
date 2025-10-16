@@ -1,136 +1,147 @@
-import 'dart:io';
+import 'dart:io'; // importa a biblioteca para entrada/saída no terminal
 
-// lê um inteiro (para escolher opções)
+// lê um inteiro (usado para escolher opções do menu)
 int lerInt(String mensagem) {
-  int? numero;
-  while (numero == null) {
-    stdout.write(mensagem);
-    String entrada = stdin.readLineSync()!;
-    numero = int.tryParse(entrada);
-    if (numero == null) {
-      print("Valor inválido!! Digite um número inteiro\n");
-      print("~°" * 20);
+  int? numero; // variável que guardará o inteiro lido (pode ser nula inicialmente)
+
+  while (numero == null) { // repete até o usuário digitar um inteiro válido
+    stdout.write(mensagem); // exibe a mensagem pedindo a entrada
+    String entrada = stdin.readLineSync()!; // lê a linha digitada pelo usuário
+    numero = int.tryParse(entrada); // tenta converter a string para int; se falhar, número fica null
+
+    if (numero == null) { // se a conversão falhar (entrada inválida)
+      print("Valor inválido!! Digite um número inteiro\n"); // informa o usuário
+      print("~°" * 20); // imprime uma linha decorativa
     }
   }
-  return numero;
+
+  return numero; // retorna o inteiro lido
 }
 
 // lê um número decimal (double) para valores monetários
 double lerDouble(String mensagem) {
-  double? valor;
-  while (valor == null) {
-    stdout.write(mensagem);
-    String entrada = stdin.readLineSync()!;
+  double? valor; // variável que guardará o double lido (pode ser nula inicialmente)
+
+  while (valor == null) { // repete até o usuário digitar um número válido
+    stdout.write(mensagem); // exibe a mensagem pedindo a entrada
+    String entrada = stdin.readLineSync()!; // lê a linha digitada pelo usuário
+    // substitui vírgula por ponto e tenta converter para double
     valor = double.tryParse(entrada.replaceAll(',', '.'));
-    if (valor == null) {
-      print("Valor inválido!! Digite um número (ex: 1234.56)\n");
-      print("~°" * 20);
+
+    if (valor == null) { // se a conversão falhar (entrada inválida)
+      print("Valor inválido!! Digite um número (ex: 1234.56)\n"); // informa o usuário
+      print("~°" * 20); // imprime uma linha decorativa
     }
   }
-  return valor;
+
+  return valor; // retorna o double lido
 }
 
 void main() {
-  // Taxas de exemplo (atualize conforme quiser)
-  const double usdToBrl = 5.60; // 1 USD = 5.60 BRL
-  const double usdToKrw = 1400.0; // 1 USD = 1400 KRW
-  const double brlToKrw = 260.76; // 1 BRL = 260.76 KRW
+  // Taxas de exemplo (atualize conforme desejar)
+  const double usdToBrl = 5.60;      // 1 USD = 5.60 BRL
+  const double usdToKrw = 1400.0;    // 1 USD = 1400 KRW
+  const double brlToKrw = 260.76;    // 1 BRL = 260.76 KRW
 
-  // taxas inversas calculadas a partir das acima
-  final double brlToUsd = 1 / usdToBrl;
-  final double krwToUsd = 1 / usdToKrw;
-  final double krwToBrl = 1 / brlToKrw;
+  // calcula as taxas inversas a partir das acima para evitar inconsistências
+  final double brlToUsd = 1 / usdToBrl; // 1 BRL = 1/5.60 USD
+  final double krwToUsd = 1 / usdToKrw; // 1 KRW = 1/1400 USD
+  final double krwToBrl = 1 / brlToKrw; // 1 KRW = 1/260.76 BRL
 
-  print("~°" * 20);
+  print("~°" * 20); // imprime linha decorativa inicial
 
-  // valor (agora aceita decimais)
+  // solicita o valor que será convertido (aceita decimais)
   double valor = lerDouble("Digite o valor para conversão (sem símbolo): ");
-  print("~°" * 20);
+  print("~°" * 20); // imprime linha decorativa
 
-  print("\n~°" * 20);
-  print("1 - Reais (BRL)");
-  print("2 - Won (KRW)");
-  print("3 - Dólar (USD)");
-  print("");
+  print("\n~°" * 20); // separador visual antes do menu
+  print("1 - Reais (BRL)"); // opção 1: Real
+  print("2 - Won (KRW)");   // opção 2: Won
+  print("3 - Dólar (USD)"); // opção 3: Dólar
+  print(""); // linha em branco para espaçamento
+
+  // lê a opção de moeda de origem (inteiro 1..3)
   int moedaOrigem = lerInt("Escolha a moeda de origem (número): ");
-  print("~°" * 20);
+  print("~°" * 20); // imprime linha decorativa
 
-  // validação correta
+  // valida a opção de origem (deve estar entre 1 e 3)
   if (moedaOrigem < 1 || moedaOrigem > 3) {
-    print("Por favor digite o número de alguma opção válida (1 a 3).");
-    print("~°" * 20);
-    return;
+    print("Por favor digite o número de alguma opção válida (1 a 3)."); // mensagem de erro
+    print("~°" * 20); // decorativo
+    return; // encerra o programa
   }
 
-  print("\n~°" * 20);
-  print("1 - Reais (BRL)");
+  print("\n~°" * 20); // separador visual antes do menu destino
+  print("1 - Reais (BRL)"); // exibe novamente as opções para destino
   print("2 - Won (KRW)");
   print("3 - Dólar (USD)");
-  print("");
+  print(""); // espaçamento
+
+  // lê a opção de moeda de destino (inteiro 1..3)
   int moedaDestino = lerInt("Escolha a moeda de destino (número): ");
-  print("~°" * 20);
+  print("~°" * 20); // imprime linha decorativa
 
+  // valida a opção de destino (deve estar entre 1 e 3)
   if (moedaDestino < 1 || moedaDestino > 3) {
-    print("Opção de destino inválida (1 a 3).");
-    return;
+    print("Opção de destino inválida (1 a 3)."); // mensagem de erro
+    return; // encerra o programa
   }
 
-  // se mesma moeda
+  // se origem e destino forem iguais, não precisa converter
   if (moedaOrigem == moedaDestino) {
-    print(
-      "\nOrigem e destino são iguais; valor permanece ${valor.toStringAsFixed(2)}",
-    );
-    print("~" * 20);
-    return;
+    print("\nOrigem e destino são iguais; valor permanece ${valor.toStringAsFixed(2)}");
+    print("~" * 20); // decorativo
+    return; // encerra o programa
   }
 
-  double resultado = 0.0;
-  String nomeOrigem = '', nomeDestino = '';
+  double resultado = 0.0; // variável para guardar o valor convertido
+  String nomeOrigem = '', nomeDestino = ''; // variáveis para os códigos das moedas (BRL, USD, KRW)
 
-  // === Conversões (condições com origem -> destino, sem inverter) ===
-  // Origem = BRL
+  // === Conversões (cada bloco trata de Origem -> Destino diretamente) ===
+
+  // Origem = BRL (1)
   if (moedaOrigem == 1 && moedaDestino == 2) {
     // BRL -> KRW
-    resultado = valor * brlToKrw;
-    nomeOrigem = 'BRL';
-    nomeDestino = 'KRW';
+    resultado = valor * brlToKrw; // multiplica pelo fator BRL->KRW
+    nomeOrigem = 'BRL'; // nome da moeda origem
+    nomeDestino = 'KRW'; // nome da moeda destino
   } else if (moedaOrigem == 1 && moedaDestino == 3) {
     // BRL -> USD
-    resultado = valor * brlToUsd;
+    resultado = valor * brlToUsd; // multiplica pelo fator BRL->USD (inverso de USD->BRL)
     nomeOrigem = 'BRL';
     nomeDestino = 'USD';
   }
-  // Origem = KRW
+  // Origem = KRW (2)
   else if (moedaOrigem == 2 && moedaDestino == 1) {
     // KRW -> BRL
-    resultado = valor * krwToBrl;
+    resultado = valor * krwToBrl; // multiplica pelo fator KRW->BRL
     nomeOrigem = 'KRW';
     nomeDestino = 'BRL';
   } else if (moedaOrigem == 2 && moedaDestino == 3) {
     // KRW -> USD
-    resultado = valor * krwToUsd;
+    resultado = valor * krwToUsd; // multiplica pelo fator KRW->USD
     nomeOrigem = 'KRW';
     nomeDestino = 'USD';
   }
-  // Origem = USD
+  // Origem = USD (3)
   else if (moedaOrigem == 3 && moedaDestino == 1) {
     // USD -> BRL
-    resultado = valor * usdToBrl;
+    resultado = valor * usdToBrl; // multiplica pelo fator USD->BRL
     nomeOrigem = 'USD';
     nomeDestino = 'BRL';
   } else if (moedaOrigem == 3 && moedaDestino == 2) {
     // USD -> KRW
-    resultado = valor * usdToKrw;
+    resultado = valor * usdToKrw; // multiplica pelo fator USD->KRW
     nomeOrigem = 'USD';
     nomeDestino = 'KRW';
   } else {
+    // caso não se encaixe em nenhuma condição (proteção extra)
     print("\nNão foi possível realizar a conversão (combinação inválida).");
-    return;
+    return; // encerra o programa
   }
 
+  // exibe o resultado formatado com duas casas decimais
   print("");
-  print(
-    "${valor.toStringAsFixed(2)} $nomeOrigem = ${resultado.toStringAsFixed(2)} $nomeDestino",
-  );
-  print("~" * 20);
+  print("${valor.toStringAsFixed(2)} $nomeOrigem = ${resultado.toStringAsFixed(2)} $nomeDestino");
+  print("~" * 20); // imprime linha final decorativa
 }
