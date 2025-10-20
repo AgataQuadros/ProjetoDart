@@ -25,9 +25,9 @@ void main() {
   if (numero2 == 0) {
     print("~°" * 20);
     print("A divisão por 0 não é possivel");
-    print("Não se surpreenda caso o programa quebrar");
     print("Reinicie-o e tente novamente com valores diferentes");
     print("~°" * 20);
+    return;
   }
   // a "!" mas linahs de leitura não deixa
   //fazer uma validação externa de null
