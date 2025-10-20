@@ -50,7 +50,7 @@ void main() {
   // calcula o valor dos juros compostos
   // double jurosComposto = montanteComposto - capital;
 
-  if (capital == 0) {
+  if (capital == 0|| taxa == 0 || tempo == 0) {
     print("~°" * 20);
     print("O calculo não é possivel pois não a oque clcular");
     print("Reinicie-o e tente novamente com valores diferentes");
