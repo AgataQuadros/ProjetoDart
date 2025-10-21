@@ -1,66 +1,102 @@
 import 'dart:io';
-
-// lê um número decimal (double) para valores monetários
-double lerDouble(String mensagem) {
-  double?
-  valor; // variável que guardará o double lido (pode ser nula inicialmente)
-
-  while (valor == null) {
-    // repete até o usuário digitar um número válido
-    stdout.write(mensagem); // exibe a mensagem pedindo a entrada
-    String entrada = stdin.readLineSync()!; // lê a linha digitada pelo usuário
-    // substitui vírgula por ponto e tenta converter para double
-    valor = double.tryParse(entrada.replaceAll(',', '.'));
-
-    if (valor == null) {
-      // se não conseguir retorna a seguinte mensagem
-      print("Valor inválido!! Digite um número (ex: 1234.56)\n");
-      print("~°" * 20);
-    }
-  }
-
-  return valor; // retorna o número válido digitado
-}
+import 'dart:math';
 
 void main() {
-  print("~°" * 20);
-  // lê o capital inicial
-  double capital = lerDouble("Digite o valor do capital inicial (R\$): ");
-
-  print(" ");
-  // lê a taxa de juros (em porcentagem)
-  double taxa = lerDouble("Digite a taxa de juros (% ao mês): ");
-  print(" ");
-  // lê o tempo (em meses)
-  double tempo = lerDouble("Digite o tempo (meses): ");
-  print("~" * 20);
-
-  // converte taxa percentual para decimal
-  double taxaDecimal = taxa / 100;
-
-  // cálculo de juros simples: J = C × i × t
-  double jurosSimples = capital * taxaDecimal * tempo;
-
-  // cálculo de montante (valor total com juros simples)
-  double montanteSimples = capital + jurosSimples;
-
-  // cálculo de juros compostos: M = C × (1 + i)^t
-  // double montanteComposto = capital * (pow(1 + taxaDecimal, tempo));
-
-  // calcula o valor dos juros compostos
-  // double jurosComposto = montanteComposto - capital;
-
-  if (capital == 0|| taxa == 0 || tempo == 0) {
+  // variável de controle do loop
+  bool continuar = true;
+  // loop principal do programa
+  while (continuar) {
+    print("");
     print("~°" * 20);
-    print("O calculo não é possivel pois não a oque clcular");
-    print("Reinicie-o e tente novamente com valores diferentes");
+    print("CÁLCULO DE JUROS");
     print("~°" * 20);
-    return;
+    print("");
+
+    // lê o capital inicial
+    stdout.write("Digite o valor inicial (capital): ");
+    String entradaCapital = stdin.readLineSync()!;
+    double? capital = double.tryParse(entradaCapital.replaceAll(',', '.'));
+    print("~" * 20);
+
+    // valida se o capital é válido
+    if (capital == null || capital.isNegative) {
+      print("");
+      print("Valor inválido! Digite um número positivo.");
+      print("~°" * 20);
+      continue; // volta para o início do loop
+    }
+
+    // lê a taxa de juros
+    print("");
+    stdout.write("Digite a taxa de juros (% ao mês): ");
+    String entradaTaxa = stdin.readLineSync()!;
+    double? taxa = double.tryParse(entradaTaxa.replaceAll(',', '.'));
+    print("~" * 20);
+
+    // valida se a taxa é válida
+    if (taxa == null || taxa.isNegative) {
+      print("");
+      print("Taxa inválida! Digite um número maior ou igual a 0.");
+      print("~°" * 20);
+      continue; // volta para o início do loop
+    }
+
+    // lê o tempo (em meses)
+    print("");
+    stdout.write("Digite o tempo (em meses): ");
+    String entradaTempo = stdin.readLineSync()!;
+    int? tempo = int.tryParse(entradaTempo);
+    print("~" * 20);
+
+    // valida se o tempo é válido
+    if (tempo == null || tempo.isNegative) {
+      print("");
+      print("Tempo inválido! Digite um número inteiro positivo.");
+      print("~°" * 20);
+      continue; // volta para o início do loop
+    }
+
+    // converte taxa percentual para decimal
+    double taxaDecimal = taxa / 100;
+
+    // cálculo de juros simples: J = C × i × t
+    double jurosSimples = capital * taxaDecimal * tempo;
+
+    // cálculo de montante (valor total com juros simples)
+    double montanteSimples = capital + jurosSimples;
+
+    // cálculo de juros compostos: M = C × (1 + i)^t
+    double montanteComposto = capital * (pow(1 + taxaDecimal, tempo));
+
+    // calcula o valor dos juros compostos
+    double jurosComposto = montanteComposto - capital;
+
+    print(" ");
+    print("Juros Simples: R\$ ${jurosSimples.toStringAsFixed(2)}");
+    print(" ");
+    print("~" * 20);
+    print("Montante (Simples): R\$ ${montanteSimples.toStringAsFixed(2)}");
+    print(" ");
+    print("~" * 20);
+    print("Juros Compostos: R\$ ${jurosComposto.toStringAsFixed(2)}");
+    print(" ");
+    print("~" * 20);
+    print("Montante (Composto): R\$ ${montanteComposto.toStringAsFixed(2)}");
+    print("~°" * 20);
+
+    print(" ");
+    print("~°" * 20);
+    stdout.write("Deseja realizar outro cálculo? (s/n): ");
+    String resposta = stdin.readLineSync()!.trim().toLowerCase();
+    print("~" * 20);
+
+    if (resposta != 's') {
+      continuar = false; // sai do loop
+      print("");
+      print("Obrigado por usar! Encerrando o programa... ");
+      print("~°" * 20);
+    } else {
+      print("");
+    }
   }
-
-  print("");
-  print("Juros Simples: R\$ ${jurosSimples.toStringAsFixed(2)}");
-  print("Montante (Simples): R\$ ${montanteSimples.toStringAsFixed(2)}");
-  // print("\nJuros Compostos: R\$ ${jurosComposto.toStringAsFixed(2)}");
-  // print("Montante (Composto): R\$ ${montanteComposto.toStringAsFixed(2)}");
 }
