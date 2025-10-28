@@ -5,20 +5,47 @@
 
 import 'dart:io';
 
-void main(){
-  while(true){
-    stdout.write("Digite o valor do dividendo: ");
-    String entrada = stdin.readLineSync()!; // entrada do 1º numero
-    int? numero = int.tryParse(
-      entrada.replaceAll(" ", ""),
-    ); // retira qulquer espaço na entrada
+void main() {
+  while (true) {
+    print(" ");
+    stdout.write("Digite o valor inicial (capital): ");
+    String entradaTem = stdin.readLineSync()!;
+    double? tempo = double.tryParse(
+      entradaTem.replaceAll(',', '.').replaceAll(" ", ""),
+    );
     print("~" * 20);
-    // valida a entrada
-    if (numero == null || numero.isNegative) {
+
+    // valida se o capital é válido
+    if (tempo == null || tempo.isNegative) {
       print("");
-      print("Valor inválida! Digite um número inteiro e positivo");
+      print("Valor inválido! Digite um número positivo.");
       print("~°" * 20);
       continue; // volta para o início do loop
+    }
+
+    // lê a taxa de juros
+    print("");
+    stdout.write("Digite a taxa de juros (% ao mês): ");
+    String entradaVel = stdin.readLineSync()!;
+    double? acelera = double.tryParse(
+      entradaVel.replaceAll(',', '.').replaceAll(" ", ""),
+    );
+    print("~°" * 20);
+
+    // valida se a taxa é válida
+    if (acelera == null) {
+      print("");
+      print("Taxa inválida! Digite um número maior ou igual a 0.");
+      print("~°" * 20);
+      continue; // volta para o início do loop
+    }
+
+    double velocidade = 0;
+    for (int i = 0; i < tempo; i++) {
+      velocidade += acelera;
+      print("");
+      print("Velocidade atual: $velocidade");
+      print("~°" * 20);
     }
 
     print(" ");
