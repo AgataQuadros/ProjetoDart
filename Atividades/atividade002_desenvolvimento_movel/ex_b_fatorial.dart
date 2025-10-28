@@ -5,7 +5,7 @@ import 'dart:io';
 
 void main() {
   while (true) {
-    stdout.write("Digite o valor do dividendo: ");
+    stdout.write("Digite o valor do inicio: ");
     String entrada = stdin.readLineSync()!; // entrada do 1º numero
     int? numero = int.tryParse(
       entrada.replaceAll(" ", ""),
