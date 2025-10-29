@@ -5,8 +5,10 @@
 
 import 'dart:io';
 
-void main(){
-  while(true){
+void main() {
+  while (true) {
+    print("");
+    print("~°" * 20);
     stdout.write("Digite o valor do dividendo: ");
     String entrada = stdin.readLineSync()!; // entrada do 1º numero
     int? numero = int.tryParse(
@@ -20,6 +22,11 @@ void main(){
       print("~°" * 20);
       continue; // volta para o início do loop
     }
+
+    double calorias = numero / 4.184;
+    print("${numero.toStringAsFixed(2)} Joules é igual a");
+    print("${calorias.toStringAsFixed(2)} Calorias");
+    print("~" * 20);
 
     print(" ");
     print("~°" * 20);
