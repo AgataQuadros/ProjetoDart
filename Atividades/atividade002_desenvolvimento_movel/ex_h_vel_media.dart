@@ -5,21 +5,51 @@
 
 import 'dart:io';
 
-void main(){
-  while(true){
-    stdout.write("Digite o valor do dividendo: ");
-    String entrada = stdin.readLineSync()!; // entrada do 1º numero
-    int? numero = int.tryParse(
-      entrada.replaceAll(" ", ""),
-    ); // retira qulquer espaço na entrada
+void main() {
+  while (true) {
+    print(" ");
+    stdout.write("Digite a distancia em quilometros: ");
+    String entradaDis = stdin.readLineSync()!;
+    double? distancia = double.tryParse(
+      entradaDis.replaceAll(',', '.').replaceAll(" ", ""),
+    );
     print("~" * 20);
-    // valida a entrada
-    if (numero == null || numero.isNegative) {
+
+    // valida se o capital é válido
+    if (distancia == null || distancia.isNegative) {
       print("");
-      print("Valor inválida! Digite um número inteiro e positivo");
+      print("Valor inválido! Digite um número positivo.");
       print("~°" * 20);
       continue; // volta para o início do loop
     }
+
+    print(" ");
+    stdout.write("Digite o tempo em horas: ");
+    String entradaTem = stdin.readLineSync()!;
+    int? tempo = int.tryParse(
+      entradaTem.replaceAll(',', '.').replaceAll(" ", ""),
+    );
+    print("~" * 20);
+
+    // valida se o capital é válido
+    if (tempo == null || tempo.isNegative) {
+      print("");
+      print("Valor inválido! Digite um número positivo.");
+      print("~°" * 20);
+      continue; // volta para o início do loop
+    }
+
+    double velocidadeMedia = distancia / tempo;
+
+    print("");
+    print("Em um percurso de ${distancia.toStringAsFixed(2)}km");
+    print("");
+    print("Percorrido em um tempo de $tempo\h");
+    print("");
+    print("A velocidade média é de ${velocidadeMedia.toStringAsFixed(2)}km/h");
+    print("");
+    print("~" * 20);
+    print("");
 
     print(" ");
     print("~°" * 20);
