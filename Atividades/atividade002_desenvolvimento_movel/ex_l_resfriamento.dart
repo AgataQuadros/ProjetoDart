@@ -8,20 +8,31 @@
 
 import 'dart:io';
 
-void main(){
-  while(true){
-    stdout.write("Digite o valor do dividendo: ");
+void main() {
+  while (true) {
+    stdout.write("Digite temperatura para resfriamento: ");
     String entrada = stdin.readLineSync()!; // entrada do 1º numero
-    int? numero = int.tryParse(
+    double? temperatura = double.tryParse(
       entrada.replaceAll(" ", ""),
     ); // retira qulquer espaço na entrada
     print("~" * 20);
     // valida a entrada
-    if (numero == null || numero.isNegative) {
+    if (temperatura == null || temperatura.isNegative) {
       print("");
       print("Valor inválida! Digite um número inteiro e positivo");
       print("~°" * 20);
       continue; // volta para o início do loop
+    }
+
+    double esfria = temperatura * 0.02;
+    int tempo = 0;
+
+    while (temperatura! > 26) {
+      temperatura -= esfria;
+      tempo++;
+      print(
+        "$tempo\s ${temperatura.toStringAsFixed(2)}",
+      );
     }
 
     print(" ");
