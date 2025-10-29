@@ -5,8 +5,8 @@
 
 import 'dart:io';
 
-void main(){
-  while(true){
+void main() {
+  while (true) {
     stdout.write("Digite o valor do dividendo: ");
     String entrada = stdin.readLineSync()!; // entrada do 1º numero
     int? numero = int.tryParse(
@@ -19,6 +19,11 @@ void main(){
       print("Valor inválida! Digite um número inteiro e positivo");
       print("~°" * 20);
       continue; // volta para o início do loop
+    }
+
+    
+    for (int i = numero; i >= 0; i--) {
+      print(i);
     }
 
     print(" ");
