@@ -9,7 +9,7 @@ void main() {
   while (true) {
     print("");
     print("~°" * 20);
-    stdout.write("Digite o valor do dividendo: ");
+    stdout.write("Digite uma energia em Joules: ");
     String entrada = stdin.readLineSync()!; // entrada do 1º numero
     int? numero = int.tryParse(
       entrada.replaceAll(" ", ""),
