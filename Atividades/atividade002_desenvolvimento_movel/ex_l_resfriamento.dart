@@ -19,7 +19,7 @@ void main() {
     // valida a entrada
     if (temperatura == null || temperatura.isNegative) {
       print("");
-      print("Valor inválida! Digite um número inteiro e positivo");
+      print("Valor inválido! Digite um número inteiro e positivo");
       print("~°" * 20);
       continue; // volta para o início do loop
     }
