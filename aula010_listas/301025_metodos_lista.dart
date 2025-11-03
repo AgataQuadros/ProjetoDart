@@ -89,19 +89,19 @@ void main() {
   print("Lista Nova: $listaVogais2");
   print("~" * 20);
   
-  // print(" ");
-  // List<String> listaArtistas = ["Fernanda Torres", "Paulo José", "Raul Cortez"];
-  // print("~" * 20);
-  // print("Lista original: $listaArtistas");
-  // listaArtistas.insert(4, "Grande Otelo");
-  // print("Lista Nova: $listaArtistas");
-  // print("~" * 20);
+  print(" ");
+  List<int> listaNumeros2 = [1,2,3,4,5,6];
+  print("~" * 20);
+  print("Lista original: $listaNumeros2");
+  var listaReversa = listaNumeros2.reversed.toList();
+  print("Lista Nova: $listaReversa");
+  print("~" * 20);
 
-  // print(" ");
-  // List<String> listaArtistas = ["Fernanda Torres", "Paulo José", "Raul Cortez"];
-  // print("~" * 20);
-  // print("Lista original: $listaArtistas");
-  // listaArtistas.insert(4, "Grande Otelo");
-  // print("Lista Nova: $listaArtistas");
-  // print("~" * 20);
+  print(" ");
+  List<String> listaVerduras = ["Couve", "Sarraia", "Alface", "Rúcula"];
+  print("~" * 20);
+  print("Lista original: $listaVerduras");
+  listaVerduras.shuffle();
+  print("Lista Nova: $listaVerduras");
+  print("~" * 20);
 }
