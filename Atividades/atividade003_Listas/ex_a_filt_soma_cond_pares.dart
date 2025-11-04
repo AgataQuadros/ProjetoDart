@@ -11,6 +11,7 @@ void main() {
   print("~°" * 20);
   print("~" * 20);
   while (true) {
+    List<int> numeros = [];
     while (true) {
       print(" ");
       print("~°" * 20);
@@ -18,55 +19,58 @@ void main() {
       String entrada = stdin.readLineSync()!;
       print("");
       print("~" * 20);
+
       List<String> partes = entrada.split(" ");
 
-      List<int> numeros = partes.map((p) => int.tryParse(p) ?? 0).toList();
-      print(numeros);
-      // if (numero == null || numero.isNegative) {
-      //   print("Por favor digite um número válido");
-      //   print(" ");
-      //   print("~°" * 20);
-      //   continue;
-      // } else {
-      //   break;
-      // }
+      numeros = partes.map((p) => int.tryParse(p) ?? 0).toList();
+
+      if (numeros.isEmpty) {
+        print("Por favor digite um número válido");
+        print(" ");
+        print("~°" * 20);
+        continue;
+      } else {
+        break;
+      }
     }
 
+    var numerosFiltrados = numeros
+        .where((num) => num % 2 == 0 && num > 10)
+        .toList();
 
+    print(" ");
+    print("Sua lista: $numeros");
+    print("~" * 20);
+    print("Lista filtarada: $numerosFiltrados");
+    print("~" * 20);
 
-    
-  //   while (true) {
-  //     print(" ");
-  //     stdout.write('Deseja continuar? (s/n): ');
-  //     String? resposta = stdin.readLineSync();
-  //     print("~" * 20);
+    while (true) {
+      print(" ");
+      stdout.write('Deseja continuar? (s/n): ');
+      String? resposta = stdin.readLineSync();
+      print("~" * 20);
 
-  //     if (resposta == null || resposta.isEmpty) {
-        
-  //       print(" ");
-  //       print('Resposta inválida!');
-  //       print("~°" * 20);
-  //       continue;
-  //     }
+      if (resposta == null || resposta.isEmpty) {
+        print(" ");
+        print('Resposta inválida!');
+        print("~°" * 20);
+        continue;
+      }
 
-  //     resposta = resposta.toLowerCase();
+      resposta = resposta.toLowerCase();
 
-  //     if (resposta == 'n') {
-
-  //       print(" ");
-  //       print("Obrigado por usar! Encerrando o programa... ");
-  //       print("~°" * 20);
-  //       return;
-  //     } else if (resposta == 's') {
-
-  //       break; // Sai do laço e volta pro início da calculadora
-  //     } else {
-
-  //       print(" ");
-  //       print('Opção inválida! Digite "s" ou "n".');
-  //       print("~°" * 20);
-  //     }
-  //   }
-  // }
-}
+      if (resposta == 'n') {
+        print(" ");
+        print("Obrigado por usar! Encerrando o programa... ");
+        print("~°" * 20);
+        return;
+      } else if (resposta == 's') {
+        break; // Sai do laço e volta pro início da calculadora
+      } else {
+        print(" ");
+        print('Opção inválida! Digite "s" ou "n".');
+        print("~°" * 20);
+      }
+    }
+  }
 }
