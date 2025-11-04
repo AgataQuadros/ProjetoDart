@@ -7,9 +7,6 @@ Após a filtragem, deve-se calcular a soma total
 desses números restantes.*/
 
 void main() {
-  print(" ");
-  print("~°" * 20);
-  print("~" * 20);
   while (true) {
     List<int> numeros = [];
     while (true) {
