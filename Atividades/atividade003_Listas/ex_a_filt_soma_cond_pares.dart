@@ -35,10 +35,14 @@ void main() {
         .where((num) => num % 2 == 0 && num > 10)
         .toList();
 
+    var numerosSomados = numerosFiltrados.reduce((soma, num) => soma + num);
+
     print(" ");
     print("Sua lista: $numeros");
     print("~" * 20);
     print("Lista filtarada: $numerosFiltrados");
+    print("~" * 20);
+    print("Lista Somada: $numerosSomados");
     print("~" * 20);
 
     while (true) {
