@@ -10,11 +10,7 @@ O resultado deve ser um número decimal (double).
 
 void main() {
   while (true) {
-    List<int> numeros = [];
-    double nota1 = 0;
-    double nota2 = 0;
-    double nota3 = 0;
-    double nota4 = 0;
+    List<double> notas = [];
     while (true) {
       print(" ");
       print("~°" * 20);
@@ -25,9 +21,11 @@ void main() {
 
       List<String> partes = entrada.split(" ");
 
-      numeros = partes.map((p) => int.tryParse(p) ?? 0).toList();
+      notas = partes
+          .map((p) => double.tryParse(p.replaceAll(",", ".")) ?? 0)
+          .toList();
 
-      if (numeros.isEmpty) {
+      if (notas.isEmpty) {
         print("Por favor digite um número válido");
         print(" ");
         print("~°" * 20);
@@ -37,11 +35,33 @@ void main() {
       }
     }
 
-    // oque eu to fazendooo 😭
+    // <======= PROCESSAMENTO =======>
+    // Encontra o menor número de uma lista reduzindo de acordo com o menor entre dois elementos
+    double menor = notas.reduce(min);
 
-    var menor1 = min(nota1, nota2);
-    var meno2 = min(nota3, nota4);
-    var menor = min(menor1, meno2);
+    // Copia a lista notas para a lista notas_finais
+    List<double> notas_finais = [...notas];
+
+    // Remove o menor número das notas_finais
+    notas_finais.remove(menor);
+
+    // Soma todas as notas para um total
+    double soma = notas_finais.reduce(
+      (acumulador, numero) => acumulador + numero,
+    );
+
+    // Calcula a media das notas
+    double media = soma / notas_finais.length;
+
+    print(" ");
+    print("Sua lista: $notas");
+    print("~" * 20);
+    print("Lista de Notas Filtarada: $notas_finais");
+    print("~" * 20);
+    print("Notas Somadas: $soma");
+    print("~" * 20);
+    print("Media das Notas: ${media.toStringAsFixed(2)}");
+    print("~" * 20);
 
     while (true) {
       print(" ");
