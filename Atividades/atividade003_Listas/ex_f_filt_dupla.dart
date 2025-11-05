@@ -9,20 +9,19 @@ palavras que satisfazem duas condições simultâneas:
 */
 
 void main() {
-  print(" ");
-  print("~°" * 20);
-  print("~" * 20);
   while (true) {
-    int? numero;
+    List<String> palavras = [];
     while (true) {
       print(" ");
       print("~°" * 20);
-      stdout.write("Digite um número: ");
+      stdout.write("Digite uma sequencia de palavras separados por espaço: ");
       String entrada = stdin.readLineSync()!;
       print("");
       print("~" * 20);
-      numero = int.tryParse(entrada.replaceAll(" ", ""));
-      if (numero == null || numero.isNegative) {
+
+      palavras = entrada.split(" ").toList();
+
+      if (palavras.isEmpty) {
         print("Por favor digite um número válido");
         print(" ");
         print("~°" * 20);
@@ -32,6 +31,20 @@ void main() {
       }
     }
 
+    var palavra_filtrada = palavras.where(
+      (palavra) =>
+          palavra.length >= 5 && palavra[0].toLowerCase() == "a" ||
+          palavra[0].toLowerCase() == "á" ||
+          palavra[0].toLowerCase() == "à" ||
+          palavra[0].toLowerCase() == "ã",
+    ).toList();
+
+    print(" ");
+    print("Sua Lista: $palavras");
+    print("~" * 20);
+    print("Segundo Maior Número da Lista: $palavra_filtrada");
+    print("~" * 20);
+
     while (true) {
       print(" ");
       stdout.write('Deseja continuar? (s/n): ');
@@ -39,7 +52,6 @@ void main() {
       print("~" * 20);
 
       if (resposta == null || resposta.isEmpty) {
-        
         print(" ");
         print('Resposta inválida!');
         print("~°" * 20);
@@ -49,16 +61,13 @@ void main() {
       resposta = resposta.toLowerCase();
 
       if (resposta == 'n') {
-
         print(" ");
         print("Obrigado por usar! Encerrando o programa... ");
         print("~°" * 20);
         return;
       } else if (resposta == 's') {
-
         break; // Sai do laço e volta pro início da calculadora
       } else {
-
         print(" ");
         print('Opção inválida! Digite "s" ou "n".');
         print("~°" * 20);
