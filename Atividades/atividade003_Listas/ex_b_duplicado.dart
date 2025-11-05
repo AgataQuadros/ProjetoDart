@@ -10,9 +10,6 @@ reportando o total de elementos únicos ao final.
 */
 
 void main() {
-  print(" ");
-  print("~°" * 20);
-  print("~" * 20);
   while (true) {
     List<int> numeros = [];
     while (true) {
