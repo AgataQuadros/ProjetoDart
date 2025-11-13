@@ -3,15 +3,14 @@ import 'dart:io';
 void main() {
   List<Map<String, dynamic>> tarefas = [];
   int proximoId = 1;
-  
   while (true) {
     print(" ");
     print("~°" * 60);
     print(" ");
     print(".°" * 30);
     print("-=-=-=-=-=- MENU -=-=-=-=-=-");
-    print("  1 - Adicionar Nova Tarefa");
-    print("  2 - Visualizar Tarefas");
+    print("  1 - Visualizar Tarefas");
+    print("  2 - Adicionar Nova Tarefa");
     print("  3 - Aualizar Status");
     print("  4 - Exclui Tarefa");
     print(".°" * 30);
@@ -29,7 +28,19 @@ void main() {
     }
 
     if (opcao == 1) {
-      // inserir informação no mapa
+      // visualizar tarefas
+
+      if (tarefas.isEmpty) {
+        print("Não á tarefas para visualizar! adicione algo!");
+        return;
+      }
+      for (int i = 0; i < tarefas.length; i++) {
+        var t = tarefas[i];
+        print("${i + 1}. ${t['titulo']} - ${t['concluida']}");
+      }
+    } else if (opcao == 2) {
+      // adicionar nova tarefa
+
       stdout.write("Entre com a tarefa: ");
       // úsuario entra com a tarefa em si
       String? tarefa = stdin.readLineSync();
@@ -65,24 +76,48 @@ void main() {
         continue;
       }
 
-      String statusTexto = status.toString();
-      if (status == 1) {
-        statusTexto = "Ativa";
-      } else if (status == 2) {
-        statusTexto = "Em Andamento";
-      } else if (status == 3) {
-        statusTexto = "Finalizada";
-      }
-
       tarefas.add({
         "id": proximoId,
         "titulo": tarefa,
         "descricao": descricao,
-        "status": statusTexto,
+        "status": status,
       });
-      proximoId++; // incrementa o ID automaticamente
-    } else if (opcao == 2) {
-      tarefas.forEach((tarefa) => print(tarefa));
+    } else if (opcao == 3) {
+      // atualizar status
+
+      print(".°" * 30);
+      print("-=-=-=-=-=- STATUS -=-=-=-=-=-");
+      print("  1 - Ativa");
+      print("  2 - Em Andamento");
+      print("  3 - Finalizada");
+      print(".°" * 30);
+
+      stdout.write("Entre com o status da tarefa: ");
+      String? atualizaStatus = stdin.readLineSync();
+      // o úsuario adiciona um status, no terminal vai aparecer a palavra
+      int? statusAtualiza = int.tryParse(atualizaStatus ?? '');
+      if (statusAtualiza == null || statusAtualiza <= 0) {
+        print("Entrada invalida! Digite Algo!");
+        continue;
+      } else if (statusAtualiza > 3) {
+        print("Entrada invalida! Digite um Número Dentro das Opções!");
+        continue;
+      }
+
+      // tarefas.update("concluida", (value) => statusAtualiza +1);
+      
+    } 
+    else if (opcao == 4) {
+      stdout.write("Digite o id da tarefa a excluir ");
+      // úsuario escolhe uma das opções de ação para inicias o sistema
+      String? excluir = stdin.readLineSync();
+      int? idExcluir = int.tryParse(excluir ?? '');
+      if (idExcluir == null || idExcluir <= 0) {
+        print("Entrada invalida! Nenhuma Tarefa excluida!");
+        continue;
+      }
+      // excluir tarefa
+      tarefas.removeWhere((t) => t['id'] == idExcluir);
     }
   }
 }
