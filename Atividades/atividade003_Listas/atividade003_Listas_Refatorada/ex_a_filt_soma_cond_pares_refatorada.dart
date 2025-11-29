@@ -8,25 +8,23 @@ desses números restantes.*/
 
 List<int> lerInt(lista) {
   List<int> numeros = [];
-    while (true) {
-      print(" ");
-      print("~°" * 20);
-      stdout.write('Entre com uma sequencia de números separados por espaço: ');
-      String entrada = stdin.readLineSync()!;
-      print("");
-      print("~" * 20);
+  while (true) {
+    print(" ");
+    print("~°" * 20);
+    stdout.write('Entre com uma sequencia de números separados por espaço: ');
+    String entrada = stdin.readLineSync()!;
+    print("");
+    print("~" * 20);
 
-      List<String> partes = entrada.split(" ");
+    List<String> partes = entrada.split(" ");
 
-      numeros = partes.map((p) => int.tryParse(p) ?? 0).toList();
+    numeros = partes.map((p) => int.tryParse(p) ?? 0).toList();
 
-     
-      return numeros;
-
-    }
+    return numeros;
+  }
 }
 
-bool desejaContinuar(){
+bool desejaContinuar() {
   while (true) {
     print(" ");
     stdout.write('Deseja continuar? (s/n): ');
@@ -57,28 +55,38 @@ bool desejaContinuar(){
   }
 }
 
+List filtroEsoma(numeros) {
+  List<int> numerosFiltrados = numeros
+      .where((num) => num % 2 == 0 && num > 10)
+      .toList();
+
+  int numerosSomados = 0;
+
+  if (numerosFiltrados.length == 0) {
+    print("Valor invalido, nenhum número maior que 10 encontrado");
+  } else {
+    numerosSomados = numerosFiltrados.reduce((soma, num) => soma += num);
+  }
+
+  return [numerosFiltrados, numerosSomados];
+}
+
 void main() {
   while (true) {
     List<int> lista = [];
     var numeros = lerInt(lista);
 
-    print(numeros);
-
-    List<int> numerosFiltrados = numeros
-        .where((num) => num % 2 == 0 && num > 10)
-        .toList();
-
-    int numerosSomados = numerosFiltrados.reduce((soma, num) => soma += num);
+    var filtra_soma = filtroEsoma(numeros);
 
     print(" ");
     print("Sua lista: $numeros");
     print("~" * 20);
-    print("Lista filtarada: $numerosFiltrados");
+    print("Lista filtarada: ${filtra_soma[0]}");
     print("~" * 20);
-    print("Lista Somada: $numerosSomados");
+    print("Lista Somada: ${filtra_soma[1]}");
     print("~" * 20);
 
-   if (!desejaContinuar()) {
+    if (!desejaContinuar()) {
       print('Fim do programa!');
       return;
     }
