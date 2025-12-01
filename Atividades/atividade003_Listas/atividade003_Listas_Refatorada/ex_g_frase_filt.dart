@@ -7,61 +7,78 @@ concatenando apenas as palavras que terminam com a letra
 separadas por um espaço na frase final.
 */
 
-void main() {
-  print(" ");
-  print("~°" * 20);
-  print("~" * 20);
+List<String> lerString(lista) {
+  List<String> partes = [];
   while (true) {
-    int? numero;
-    while (true) {
+    print(" ");
+    print("~°" * 20);
+    stdout.write('Entre com uma sequencia de palavras separadas por espaço: ');
+    String entrada = stdin.readLineSync()!;
+    print("");
+    print("~" * 20);
+
+    partes = entrada.split(" ");
+
+    return partes;
+  }
+}
+
+bool desejaContinuar() {
+  while (true) {
+    print(" ");
+    stdout.write('Deseja continuar? (s/n): ');
+    String? resposta = stdin.readLineSync();
+    print("~" * 20);
+
+    if (resposta == null || resposta.isEmpty) {
       print(" ");
+      print('Resposta inválida!');
       print("~°" * 20);
-      stdout.write("Digite um número: ");
-      String entrada = stdin.readLineSync()!;
-      print("");
-      print("~" * 20);
-      numero = int.tryParse(entrada.replaceAll(" ", ""));
-      if (numero == null || numero.isNegative) {
-        print("Por favor digite um número válido");
-        print(" ");
-        print("~°" * 20);
-        continue;
-      } else {
-        break;
-      }
+      continue;
     }
 
-    while (true) {
+    resposta = resposta.toLowerCase();
+
+    if (resposta == 'n') {
       print(" ");
-      stdout.write('Deseja continuar? (s/n): ');
-      String? resposta = stdin.readLineSync();
-      print("~" * 20);
+      print("Obrigado por usar! Encerrando o programa... ");
+      print("~°" * 20);
+      return false;
+    } else if (resposta == 's') {
+      return true; // Sai do laço e volta pro início da calculadora
+    } else {
+      print(" ");
+      print('Opção inválida! Digite "s" ou "n".');
+      print("~°" * 20);
+    }
+  }
+}
 
-      if (resposta == null || resposta.isEmpty) {
-        
-        print(" ");
-        print('Resposta inválida!');
-        print("~°" * 20);
-        continue;
-      }
+String filtraFrase(palavras) {
+  var filtragem = palavras.where(
+    (palavra) =>
+        palavra.toLowerCase().startsWith("r") ||
+        palavra.toLowerCase().endsWith("r"),
+  );
 
-      resposta = resposta.toLowerCase();
+  String frase = filtragem.join(' ');
 
-      if (resposta == 'n') {
+  return frase;
+}
 
-        print(" ");
-        print("Obrigado por usar! Encerrando o programa... ");
-        print("~°" * 20);
-        return;
-      } else if (resposta == 's') {
+void main() {
+  while (true) {
+    List<String> lista = [];
+    var palavras = lerString(lista);
 
-        break; // Sai do laço e volta pro início da calculadora
-      } else {
+    var resultado = filtraFrase(palavras);
 
-        print(" ");
-        print('Opção inválida! Digite "s" ou "n".');
-        print("~°" * 20);
-      }
+    print("Resultado final:");
+    print(resultado);
+
+    if (!desejaContinuar()) {
+      print('Fim do programa!');
+      return;
     }
   }
 }
