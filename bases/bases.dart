@@ -171,71 +171,44 @@ double lerDouble(String mensagem) {
 
   return valor; // retorna o número válido digitado
 }
-/* 
-// lê um número decimal (double) para valores monetários
-String lerString(String mensagem) {
-  // variável que guardará o double lido (pode ser nula inicialmente)
-  String? valor;
 
-  while (true) {
-    // repete até o usuário digitar um número válido
-    stdout.write(mensagem); // exibe a mensagem pedindo a entrada
-    String entrada = stdin.readLineSync()!; // lê a linha digitada pelo usuário
-
-    if (entrada == null) {
-      // se não conseguir retorna a seguinte mensagem
-      print("Valor inválido!! Digite um número (ex: 1234.56)\n");
-      print("~-" * 30);
-    }
-  }
-
-  return valor; // retorna o número válido digitado
-}
-
-String lerString(String mensagem) {
-  String? valor;
-  List<int> paraLista = [];
-  while (true) {
-    stdout.write(mensagem);
-    String entrada = stdin.readLineSync()!;
-
-    List<String> partes = entrada.split(" ");
-
-    paraLista = partes.map((p) => int.tryParse(p) ?? 0).toList();
-
-    paraLista.forEach((e){
-      if(e == null){}
-    });
-  }
-} */
-
-/*bool chamaFim() {
+bool desejaContinuar() {
   while (true) {
     print(" ");
-    stdout.write('Deseja continuar? (s/n): ');
-    String? resposta = stdin.readLineSync();
-    print("~" * 20);
+    stdout.write(
+      'Deseja continuar? (s/n): ',
+    ); // mostra a mensagem de entrada no terminal
+    String? resposta = stdin
+        .readLineSync(); // entrada onde o usuario vai digitar a resposta
+    print("~-" * 30);
 
+    // valida se a entrada é nula e responde com erro
     if (resposta == null || resposta.isEmpty) {
       print(" ");
       print('Resposta inválida!');
-      print("~°" * 20);
+      print(".°" * 30);
       continue;
     }
 
+    // passa a resposta para caixa baixa para facilitar a validação
     resposta = resposta.toLowerCase();
 
+    // caso seja n(não) enviara esta mensagem
     if (resposta == 'n') {
       print(" ");
       print("Obrigado por usar! Encerrando o programa... ");
-      print("~°" * 20);
-      break;
-    } else if (resposta == 's') {
-      break; // Sai do laço e volta pro início da calculadora
-    } else {
+      print("~°" * 60);
+      return false;
+    }
+    // caso seja s(sim) enviara essa resposta
+    else if (resposta == 's') {
+      return true; // Sai do laço e volta pro início da calculadora
+    }
+    // se for qualquer outra coisa enviara essa mensagem de erro
+    else {
       print(" ");
       print('Opção inválida! Digite "s" ou "n".');
-      print("~°" * 20);
+      print(".°" * 30);
     }
   }
-}*/
+}
