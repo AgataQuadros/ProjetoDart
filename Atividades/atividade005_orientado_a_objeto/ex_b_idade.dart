@@ -79,17 +79,25 @@ class Validacao {
   }
 }
 
+// Classe onde eu vou fazer o calculo da idade
 class Idade {
+  // declaração das variaveis
   var anoAtual;
   var anoNiver;
 
+  // construtor padraão: receber anoAtual e anoNiver digitados pelo usuário
   Idade(this.anoAtual, this.anoNiver);
+
+  // uma ArrowFunction para calcular a idade
 
   int calcularIdade() => anoAtual - anoNiver;
 
+  // função de exibição
   void exibir() {
+    // cha a função para ser exibida
     var idadeCalculada = calcularIdade();
 
+    // exibe o resultado da função
     print(" ");
     print("~-" * 30);
     print("A sua idade é $idadeCalculada ano(s)");
@@ -97,11 +105,13 @@ class Idade {
   }
 }
 
+// void principal, de onde tudo vai sair
 void main() {
   while (true) {
     print(" ");
     Validacao validacao = Validacao(); // chama a classe Validação
     print("~°" * 60);
+    // envia a mensagem para a função lerInt para que ela seja utilizada
     int anoAtual = validacao.lerInt(
       "Entre com o ano que você deseja comparar(ex: 2025): ",
     );
@@ -110,8 +120,10 @@ void main() {
       "Entre com o ano do seu nascimento(ex: 2006): ",
     );
 
+    // envia ou valores para a classe Idade para que ela seja utilizada
     Idade idade = Idade(anoAtual, anoNiver);
 
+    // chama a função de exibição
     idade.exibir();
 
     // chama a função desejaContinuar para que ela seja utilizada
