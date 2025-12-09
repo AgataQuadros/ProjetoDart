@@ -5,9 +5,9 @@ import 'dart:io';
 
 // classe de validação de dados
 class Validacao {
-  // lê um inteiro (usado para escolher opções do menu)
-  int lerInt(String mensagem) {
-    int? numero; // define a variavel "numero"
+  // lê um double (usado para coletar as notas)
+  double lerDouble(String mensagem) {
+    double? numero; // define a variavel "numero"
 
     while (numero == null) {
       // repete até o usuário digitar um número válido
@@ -16,20 +16,18 @@ class Validacao {
       String entrada = stdin.readLineSync()!;
       // entrada onde o usuario vai digitar o numero
 
-      if (entrada.length > 4 || entrada.length <= 0) {
-        print(
-          "Por favor entre só com o ano em que você nasceu e o ano a comparar(ex: 2025-2006)",
-        );
-        print(".°" * 30);
-      } else {
-        numero = int.tryParse(entrada);
-        // tenta converter a entrada para numero
+      numero = double.tryParse(entrada);
+      // tenta converter a entrada para numero
 
-        if (numero == null) {
-          // se não conseguir retorna a seguinte mensagem
-          print("Valor inválido!! Digite um número(ex:1,2,3,4,5)");
-          print("~-" * 30);
-        }
+      if (numero == null) {
+        // se não conseguir retorna a seguinte mensagem
+        print("Valor inválido!! Digite um número(ex:1,2,3,4,5)");
+        print("~-" * 30);
+      } else if (numero < 0 || numero > 25) {
+        // caso o numero esteja fora do intervalo ele envia a seguinte mensagem
+        print("Valor inválido!!");
+        print("Digite um número entre 0 e 25 para se clasificar como nota!!");
+        print("~-" * 30);
       }
     }
 
@@ -74,6 +72,72 @@ class Validacao {
         print('Opção inválida! Digite "s" ou "n".');
         print(".°" * 30);
       }
+    }
+  }
+}
+
+// classe onde a media será calculada
+class Boletim {
+  // declaração de variaveis
+  var nota1;
+  var nota2;
+  var nota3;
+  var nota4;
+
+  Boletim({
+    required this.nota1,
+    required this.nota2,
+    required this.nota3,
+    required this.nota4,
+  });
+
+  double soma() => nota1 + nota2 + nota3 + nota4;
+
+  double media() => (nota1 + nota2 + nota3 + nota4) / 4;
+
+  void exibir() {
+    var somas = soma();
+    var medias = media();
+
+    print(" ");
+    print("========== BOLETIM =========");
+    print("~-" * 30);
+    print("----- Notas ------");
+    print(nota1);
+    print(nota2);
+    print(nota3);
+    print(nota4);
+    print("----- Totais ------");
+    print(somas);
+    print(medias);
+    print("~-" * 30);
+  }
+}
+
+void main() {
+  while (true) {
+    print(" ");
+    print("~°" * 60);
+    Validacao validacao = Validacao();
+
+    double nota1 = validacao.lerDouble("1ª nota:");
+    double nota2 = validacao.lerDouble("2ª nota:");
+    double nota3 = validacao.lerDouble("3ª nota:");
+    double nota4 = validacao.lerDouble("4ª nota:");
+
+    Boletim boletim = Boletim(
+      nota1: nota1,
+      nota2: nota2,
+      nota3: nota3,
+      nota4: nota4,
+    );
+
+    boletim.exibir();
+
+    bool continuar = validacao.desejaContinuar();
+
+    if (!continuar) {
+      break;
     }
   }
 }
