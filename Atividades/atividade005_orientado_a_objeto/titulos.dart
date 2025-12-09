@@ -9,7 +9,7 @@
 
 5 - Faça um programa que recebe um número inteiro e mostre o sucessor e antecessor. [X]
 
-6 - Faça um programa que receba um número qualquer e calcule o dobro e o triplo desse número.
+6 - Faça um programa que receba um número qualquer e calcule o dobro e o triplo desse número. [X]
 
 7 - Faça um programa para converter medidas
 
