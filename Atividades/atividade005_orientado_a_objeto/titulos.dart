@@ -7,7 +7,7 @@
 
 4 - Faça um programa que receba e divida 2 números. A saída da divisão precisará ser formatada com 4 casas decimais. [X]
 
-5 - Faça um programa que recebe um número inteiro e mostre o sucessor e antecessor.
+5 - Faça um programa que recebe um número inteiro e mostre o sucessor e antecessor. [X]
 
 6 - Faça um programa que receba um número qualquer e calcule o dobro e o triplo desse número.
 
