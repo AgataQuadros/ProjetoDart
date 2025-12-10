@@ -11,7 +11,7 @@
 
 6 - Faça um programa que receba um número qualquer e calcule o dobro e o triplo desse número. [X]
 
-7 - Faça um programa para converter medidas
+7 - Faça um programa para converter medidas [X]
 
 8 - Faça um programa que receba um número inteiro. O programa deverá imprimir tabuada de multiplicação deste número.
 
