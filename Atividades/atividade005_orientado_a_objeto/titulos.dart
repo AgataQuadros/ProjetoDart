@@ -11,9 +11,9 @@
 
 6 - Faça um programa que receba um número qualquer e calcule o dobro e o triplo desse número. [X]
 
-7 - Faça um programa para converter medidas [X]
+7 - Faça um programa para converter medidas. [X]
 
-8 - Faça um programa que receba um número inteiro. O programa deverá imprimir tabuada de multiplicação deste número.
+8 - Faça um programa que receba um número inteiro. O programa deverá imprimir tabuada de multiplicação deste número. [X]
 
 9 - Faça um programa que receba um valor em reais, depois calcule quantos euros, dólares e wons dariam para comprar com esse valor.
 
